@@ -85,13 +85,21 @@ void Aquarium::run(BestioleFactory* Factory,std::vector<int> vecteur_bestioles_i
    } // while
    std::cout<<"nombre bestioles gregaire : "<< vecteur_bestioles_initiales[0] <<std::endl;
    std::cout<<"nombre bestioles gregaires mortes par collision : "<<flotte->nbrBestiolesGregairesMortes<<std::endl;
+
+
    std::cout<<"nombre bestioles Kamikaze : "<<vecteur_bestioles_initiales[1]<<std::endl;
    std::cout<<"nombre bestioles Kamikaze mortes par collision : "<<flotte->nbrBestiolesKamikazeMortes<<std::endl;
+
+
    std::cout<<"nombre bestioles Peureuse : "<<vecteur_bestioles_initiales[2]<<std::endl;
    std::cout<<"nombre bestioles Peureuse mortes par collision : "<<flotte->nbrBestiolesPeureuseMortes<<std::endl;
+
    std::cout<<"nombre bestioles Prevoyantes : "<<vecteur_bestioles_initiales[3]<<std::endl;
    std::cout<<"nombre bestioles Prevoyantes mortes par collision : "<<flotte->nbrBestiolesPrevoyantMortes<<std::endl;
+
    std::cout<<"nombre bestioles Multi : "<<vecteur_bestioles_initiales[4]<<std::endl;
    std::cout<<"nombre bestioles Multi mortes par collision : "<<flotte->nbrBestiolesMultiMortes<<std::endl;
+
+
    genererFichierMetriques(vecteur_bestioles_initiales ) ;
 }
