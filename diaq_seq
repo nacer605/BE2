@@ -1,30 +1,40 @@
 @startuml
-
-participant "User" as U
+title Diagramme de séquence pour la mise à jour des attributs de la Kamikaze avec yeux lors de la détection d'une autre bestiole 
+actor "User" as U
 participant "Aquarium" as A
 participant "Milieu" as M
 participant "Bestiole" as B
 participant "Kamikaze" as K
 participant "Yeux" as Y
 
-
+activate B 
+activate A 
+activate K 
+activate Y
 U -> A : run(Factory , vecteur_bestioles_initiales)
 A -> M : Step(Factory , vecteur_bestioles_initiales)
 M --> A : 
 A -> M : percussionBestiole()
 M -> B : Percussion()
 B --> M : 
-B --> A : 
+M --> A : 
 A -> M : Update()
 M -> B : Veillir()
 B --> M :
 M -> B : executeComportement()
 B -> K : Deplacer(Bestiole , Milieu)
 K-> B : Detection(Milieu)
-B--> K . vector<bool> best_detectés 
+B->Y : detecter()
+Y-->B : vector<bool> res
+B--> K : vector<bool> best_detectés 
 K -> M : getBestioles()
-M --> K : vector<Bestiole> best_aq
-
+M --> K : <Bestiole> best_aq
+K --> B :
+B--> M :
+M -->A :
 A --> U :
-
+deactivate B 
+deactivate  K  
+deactivate Y 
+deactivate A
 @enduml

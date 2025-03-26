@@ -1,0 +1,67 @@
+@startuml
+
+title création et évolution de la bestiole dans l'ecosystème
+
+actor "Main/Utilisateur" as Main
+participant Aquarium
+participant Milieu
+participant BestioleFactory
+participant Bestiole
+participant IComportement
+participant Capteur
+participant Accessoire
+
+== Naissance ==
+Main -> Aquarium : BestioleFactory()
+Aquarium --> Main : BestioleFactory
+Main -> Aquarium : run(factory, vecteur_init)
+Aquarium -> Milieu : Step(factory, vecteur_init)
+Milieu -> BestioleFactory : CreerBestiole(x, y)
+BestioleFactory -> Bestiole : Bestiole()
+activate Bestiole
+Bestiole -> Capteur : initialiser Capteurs (Yeux, Oreille)
+Capteur--> Bestiole :
+Bestiole -> Accessoire : initialiser Accessoires (Nageoire, Carapace, etc.)
+Accessoire --> Bestiole :
+Bestiole -> IComportement : affecter IComportement (Grégaire, Kamikaze…)
+IComportement --> Bestiole :Bestiole
+Bestiole --> BestioleFactory :Bestiole
+BestioleFactory --> Milieu :
+Milieu -> Milieu : AjouterBestiole(b)
+
+== Boucle de vie ==
+
+
+
+
+    alt si age <= age_limite and resistance > 0
+    Milieu -> Bestiole : action(Milieu)
+    Bestiole --> Milieu
+    Milieu -> Bestiole : draw(Milieu)
+    Bestiole --> Milieu
+    Milieu --> Aquarium
+    Aquarium -> Milieu : percussionBestiole()
+    Milieu --> Aquarium :
+    Aquarium -> Milieu : update()
+   
+    loop bestioles du milieu
+
+    Milieu -> Bestiole : vieillir()
+    Bestiole --> Milieu :
+    Milieu -> Bestiole : executeComportement(Milieu)
+    Bestiole --> Milieu :
+
+    end 
+    Milieu --> Aquarium :
+
+
+    else
+     Milieu -> Milieu : eliminerBestiole(Bestiole)
+        deactivate Bestiole
+    Milieu --> Aquarium :
+
+    
+
+end
+
+@enduml
