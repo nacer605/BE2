@@ -1,0 +1,64 @@
+{
+"Simulation": {
+    "X_LIM": 100,
+    "Y_LIM": 100,
+    "AGE_LIM": 100,
+    "RESISTANCE_LIM": 50,
+    "TOLERANCE_COLLISION": 0.001,
+    "AFF_SIZE": 8.0,
+    "LIMITE_VUE": 30,
+    "REDUCTION_RESISTANCE": 10,
+    "VITESSE_MAX": 3,
+    "AGE_MAX": 500,
+    "RESISTANCE_MAX": 10,
+    "TAILLE" : 5,
+    "PROBA_GRÉGAIRE": 0.2,
+    "PROBA_KAMIKAZE": 0.2,
+    "PROBA_PEUREUSE": 0.2,
+    "PROBA_PRÉVOYANTE": 0.2,
+    "PROBA_MULTIPLE": 0.2,
+    "PROBA_OREILLE": 1,
+    "PROBA_YEUX": 1,
+    "PROBA_NAGEOIRE": 0.3,
+    "PROBA_CARAPACE": 0.3,
+    "PROBA_CAMOUFLAGE": 0.3
+},
+
+"Yeux": {
+        "alpha_min": 0.19625,
+        "alpha_max": 1.57,
+        "delta_min": 10,
+        "delta_max": 100,
+        "gamma_min": 0.1,
+        "gamma_max": 1
+    },
+"Oreille": {
+        "delta_min": 10,
+        "delta_max": 100,
+        "gamma_min": 0.1,
+        "gamma_max": 1
+    },
+"Kamikaze": {
+    "multiplicateur_vit_kamikaze" : 1.5
+},
+"Peureuse" : {
+    "multiplicateur_vit_peureuse" : 1.2 , 
+    "seuil" : 1
+},
+"BestioleCamouflage" : {
+    "PSI_min" : 0.1,
+    "PSI_max" : 0.9
+},
+"BestioleCarapace" : {
+    "eta_max" : 3,
+    "omega_max" : 5
+},
+"BestioleNageoire" : {
+    "boost_max" : 2
+},
+"Prevoyant" : {
+    "temps_Projection" : 5.0 , 
+    "seuil_Collision" : 30.0
+}
+
+}

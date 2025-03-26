@@ -1,0 +1,158 @@
+@startuml dd
+
+class BestioleFactory {
+  + liste_taux : map<string : double>
+  + CreerBestiole():Bestiole
+}
+
+class Bestiole {
+  - static const double AFF_SIZE
+  - static const double MAX_VITESSE
+  - static const double LIMITE_VUE
+  - int id
+  - double vitesse
+  - double position_x
+  - double position_y
+  - double orientation
+  - double taille
+  - int age
+  - int age_limite
+  - bool estVivant
+  - double resistance
+  - double detectabilite
+  - bool yeux
+  - bool oreille
+  - bool nageoire
+  - bool carapace
+  - bool camouflage
+  - std::vector<Capteur*> Capteurs
+  - double cumulX
+  - double cumulY
+  - T* couleur
+  - IComportement* icomportement
+
+  + void viellir()
+  + Bestiole* clonage()
+  + void Bouge(larg_max,longueur_max)
+  + void Percussion(Bestiole)
+  + void executeComportement(Milieu)
+  + std::vector<bool> Detection(Milieu)
+  + void action(Milieu)
+  + void draw(UImg)
+}
+
+class Millieu {
+ + longueur : int
+ + largeur : int
+ +AddMember()
+ +eliminerBestiole(Bestiole)
+ +Step()
+}
+
+class BestioleOreille {
+    - owner : Bestiole
+    - delta : float
+    - gamme : float
+    + detecter(Millieu) 
+
+}
+
+Interface Accessoire {
+  setParam() : void
+}
+
+Interface Capteur {
+  detecter(Millieu) : vector<Bool>
+}
+
+
+class BestioleNageoire {
+  - double boost
+  - Bestiole& Owner
+
+  + BestioleNageoire(Bestiole)
+  + void setParam()
+}
+
+class BestioleCamouflage {
+  - Bestiole& Owner
+  - double phi
+
+  + BestioleCamouflage(Bestiole)
+  + void setParam()
+}
+
+class BestioleCarapace {
+  - Bestiole& Owner
+  - double eta
+  - double omega
+
+  + BestioleCarapace(Bestiole)
+  + void setParam()
+}
+
+
+class BestioleYeux {
+  - const Bestiole& owner
+  - double alpha
+  - double delta
+  - double gamma
+
+  + BestioleYeux(Bestiole)
+  + std::vector<bool> detecter(Milieu)
+}
+
+interface IComportement {
+  + Deplacer(Bestiole, Milieu)
+}
+
+class Grégaire {
+    -Deplacer(Bestiole) 
+
+}
+
+class Peureuse{
+    -Deplacer(Bestiole) 
+
+}
+
+class Kamikaze{
+    -Deplacer(Bestiole) 
+}
+
+class Prevoyant{
+    -Deplacer(Bestiole) 
+
+}
+
+
+class Multi{
+    -Deplacer(Bestiole) 
+}
+
+BestioleFactory --> Bestiole : créer
+
+Capteur *-- Bestiole
+Capteur<|..BestioleOreille
+Capteur<|..BestioleYeux
+
+IComportement <|.. Grégaire
+IComportement <|.. Peureuse
+IComportement <|.. Kamikaze
+IComportement <|.. Prévoyant
+IComportement <|.. Multi
+Bestiole *-- IComportement
+
+
+
+Accessoire <|..BestioleNageoire
+Accessoire <|..BestioleCarapace
+Accessoire <|..BestioleCamouflage
+Accessoire *-- Bestiole
+
+
+Millieu --* "many" Bestiole : contient
+
+Millieu -- BestioleFactory
+
+@enduml
