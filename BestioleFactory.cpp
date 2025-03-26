@@ -60,7 +60,9 @@ Bestiole* BestioleFactory::CreerBestiole(int x_lim,int y_lim) {
     double cumulative_prob_4 = cumulative_prob_3 + PROBA_PRÉVOYANTE;
     double cumulative_prob_5 = cumulative_prob_4 + PROBA_MULTIPLE;
 
-    if (cumulative_prob_5 != 1) {
+    const double EPSILON = 1e-5;
+
+    if (std::abs(cumulative_prob_5-1.0)>EPSILON) {
         std::cerr << "Erreur: les probabilités de comportement ne somment pas à 1" << std::endl;
         return nullptr;
     }

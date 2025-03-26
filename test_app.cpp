@@ -33,16 +33,16 @@ int main() {
     Milieu monMilieu(largeur, hauteur);
     BestioleFactory factory;
 
-    cout << "✅ Création des bestioles...\n";
+    cout << " Création des bestioles...\n";
     for (int i = 0; i < nbBestioles; ++i) {
         Bestiole* b = factory.CreerBestiole(80, 20);
         monMilieu.AjouterBestiole(b);
     }
 
-    cout << "\n📊 État initial des bestioles :\n";
+    cout << "\n État initial des bestioles :\n";
     const auto& bestioles = monMilieu.getBestioles();
     for (Bestiole* b : bestioles) {
-        cout << "🔹 ID #" << b->getId();
+        cout << " ID #" << b->getId();
         cout << " | Vivant : " << (b->getVivant() ? "Oui" : "Non");
         cout << " | Pos(x,y) : (" << b->get_x() << ", " << b->get_y() << ")";
         cout << " | Vitesse : " << b->getVitesse();
@@ -66,7 +66,7 @@ int main() {
 
             for (Bestiole* b : copie) {
                 if (b->getVivant()) {
-                    cout << "❌ Élimination manuelle de la bestiole #" << b->getId() << " à l'étape 2\n";
+                    cout << " Élimination manuelle de la bestiole #" << b->getId() << " à l'étape 2\n";
                     b->setResistance(-10000);  // Provoque sa mort au Step suivant
                     eliminationEffectue = true;
                     break;
@@ -81,7 +81,7 @@ int main() {
                 if (b->getVivant()) {
                     Bestiole* clone = b->clonage();
                     monMilieu.AjouterBestiole(clone);
-                    cout << "\n🧬 Clonage à l'étape 3 : bestiole #" << b->getId()
+                    cout << "\n Clonage à l'étape 3 : bestiole #" << b->getId()
                          << " clonée → nouvelle bestiole #" << clone->getId() << "\n";
                     cloneEffectue = true;
                     break;
@@ -90,7 +90,7 @@ int main() {
         }
     }
 
-    cout << "\n📌 Résultat final :\n";
+    cout << "\n Résultat final :\n";
 
     map<string, int> stats;
     for (Bestiole* b : monMilieu.getBestioles()) {

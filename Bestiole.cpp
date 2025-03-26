@@ -215,6 +215,9 @@ double Bestiole::getVitesse() const {
 double Bestiole::getOrientation() const {
     return (*this).orientation;
 }
+double Bestiole::getResistance() const {
+    return (*this).resistance;
+}
 void Bestiole::setOrientation(double o){
     (*this).orientation = o;
 }

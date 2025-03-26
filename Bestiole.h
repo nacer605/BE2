@@ -63,6 +63,7 @@ public:
     double get_y() const;
     double getOrientation() const;
     double getVitesse() const;
+    double getResistance() const;
     void setOrientation(double o);
     void setVitesse(double v);
     void setDetectabilite(double phi);

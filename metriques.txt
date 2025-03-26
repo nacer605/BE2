@@ -1,0 +1,10 @@
+Nombre bestioles Gregaire : 6
+Nombre bestioles Gregaire mortes par collision : 2
+Nombre bestioles Kamikaze : 14
+Nombre bestioles Kamikaze mortes par collision : 2
+Nombre bestioles Peureuse : 13
+Nombre bestioles Peureuse mortes par collision : 1
+Nombre bestioles Prevoyante : 11
+Nombre bestioles Prevoyante mortes par collision : 0
+Nombre bestioles Multi : 6
+Nombre bestioles Multi mortes par collision : 0

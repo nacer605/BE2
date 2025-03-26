@@ -26,8 +26,9 @@ public :
    ~Aquarium( void );
 
    Milieu & getMilieu( void ) { return *flotte; }
+   void genererFichierMetriques(const std::vector<int>& vecteur_bestioles_initiales)  ;
 
-   void run(BestioleFactory* factory);
+   void run(BestioleFactory* factory,std::vector<int> vecteur_bestioles_initiales);
 
 };
 
