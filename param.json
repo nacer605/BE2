@@ -1,5 +1,6 @@
 {
 "Simulation": {
+    "nb_bestioles_in" : 20,
     "X_LIM": 100,
     "Y_LIM": 100,
     "AGE_LIM": 100,
@@ -17,13 +18,17 @@
     "PROBA_PEUREUSE": 0.2,
     "PROBA_PRÉVOYANTE": 0.2,
     "PROBA_MULTIPLE": 0.2,
-    "PROBA_OREILLE": 0.5,
-    "PROBA_YEUX": 0.5,
+    "PROBA_OREILLE": 1,
+    "PROBA_YEUX": 1,
     "PROBA_NAGEOIRE": 0.3,
     "PROBA_CARAPACE": 0.3,
     "PROBA_CAMOUFLAGE": 0.3
 },
+"Milieu" : {
+    "it_max_morts" : 300,
+    "it_naissance" : 100
 
+},
 "Yeux": {
         "alpha_min": 0.19625,
         "alpha_max": 1.57,

@@ -6,13 +6,12 @@
 #include <algorithm>
 #include <random>
 
+#include <fstream>
+#include "json.hpp"
+using json = nlohmann::json;
+
 int nb_iterations = 0;
-int nbrBestiolesGregaires = 0;
 int nbrBestiolesGregairesMortes = 0;
-int nbrBestiolesKamikaze=0;
-int nbrBestiolesPeureuse=0;
-int nbrBestiolesPrevoyant=0;
-int nbrBestiolesMulti=0;
 int nbrBestiolesKamikazeMortes=0;
 int nbrBestiolesPeureuseMortes=0;
 int nbrBestiolesPrevoyantMortes=0;
@@ -50,30 +49,19 @@ void Milieu::Update( void )
 }
 void Milieu::Step(BestioleFactory* Factory,std::vector<int> vecteur_bestioles_initiales)
 {
-    // if (nb_iterations == 0){
-    
-    //     for (auto it = bestioles.begin(); it != bestioles.end();){
-    //         if ((*it)->get_num_comportement() == 0){
-    //             nbrBestiolesGregaires++;
-    //         }
-    //         else if ((*it)->get_num_comportement() == 1){
-    //             nbrBestiolesKamikaze++;
-    //         }
-    //         else if ((*it)->get_num_comportement() == 2){
-    //             nbrBestiolesPeureuse++;
-    //         }
-    //         else if ((*it)->get_num_comportement() == 3){
-    //             nbrBestiolesPrevoyant++;
-    //         }
-    //         else if ((*it)->get_num_comportement() == 4){
-    //             nbrBestiolesMulti++;
-    //         }
-    //     }
-    // }
-    
+    std::ifstream inputFile("param.json");
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Erreur lors de l'ouverture du fichier!" << std::endl;
+        return;
+    }
+    nlohmann::json j;
+    inputFile >> j;
+
     nb_iterations++;
     int random = 0;
-    if (nb_iterations%200==0){
+    int it_naissance = j["Milieu"]["it_naissance"];
+    if (nb_iterations%it_naissance==0){
         random = std::rand()%2;
     }
     if (random>0){
@@ -91,19 +79,19 @@ void Milieu::Step(BestioleFactory* Factory,std::vector<int> vecteur_bestioles_in
         ++it;  // On passe à l'élément suivant
     } else {
         // Supprimer la bestiole morte et ne pas incrémenter l'itérateur
-        if ((*it)->get_num_comportement() == 0 && nb_iterations<=200 && (*it)->getResistance()<=0){
+        if ((*it)->get_num_comportement() == 0 && nb_iterations<=j["Milieu"]["it_max_morts"] && (*it)->getResistance()<=0){
             nbrBestiolesGregairesMortes++;
         }
-        else if ((*it)->get_num_comportement() == 1 && nb_iterations<=200 && (*it)->getResistance()<=0){
+        else if ((*it)->get_num_comportement() == 1 && nb_iterations<=j["Milieu"]["it_max_morts"] && (*it)->getResistance()<=0){
             nbrBestiolesKamikazeMortes++;
         }
-        else if ((*it)->get_num_comportement() == 2 && nb_iterations<=200 && (*it)->getResistance()<=0){
+        else if ((*it)->get_num_comportement() == 2 && nb_iterations<=j["Milieu"]["it_max_morts"] && (*it)->getResistance()<=0){
             nbrBestiolesPeureuseMortes++;
         }
-        else if ((*it)->get_num_comportement() == 3 && nb_iterations<=200 && (*it)->getResistance()<=0){
+        else if ((*it)->get_num_comportement() == 3 && nb_iterations<=j["Milieu"]["it_max_morts"] && (*it)->getResistance()<=0){
             nbrBestiolesPrevoyantMortes++;
         }
-        else if ((*it)->get_num_comportement() == 4 && nb_iterations<=200 && (*it)->getResistance()<=0){
+        else if ((*it)->get_num_comportement() == 4 && nb_iterations<=j["Milieu"]["it_max_morts"] && (*it)->getResistance()<=0){
             nbrBestiolesMultiMortes++;
         }
         eliminerBestiole(*it);

@@ -9,13 +9,26 @@
 #include <memory>
 #include <iostream>
 
+#include <fstream>
+#include "json.hpp"
+using json = nlohmann::json;
+
 using namespace std;
 
 
 int main()
 {
+   std::ifstream inputFile("param.json");
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Erreur lors de l'ouverture du fichier!" << std::endl;
+        return 0;
+    }
+    nlohmann::json j;
+    inputFile >> j;
+
    std::srand(std::time(nullptr)); // Initialisation de la graine avec le temps
-   int nbBestioles = 50;
+   int nbBestioles = j["Simulation"]["nb_bestioles_in"];
    Aquarium       ecosysteme( 640, 480, 30 );
    BestioleFactory* factory = new BestioleFactory();
    std::vector<int> vecteur_bestioles_initiales(5,0);

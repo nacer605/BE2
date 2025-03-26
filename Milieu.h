@@ -27,14 +27,9 @@ public:
     void eliminerBestiole(Bestiole* b);
     std::vector<Bestiole*> getBestioles() const;
     void Update();
-    void Step(BestioleFactory* factory,std::vector<int> vecteur_bestioles_initiales);
+    void Step(BestioleFactory* factory,std::vector<int> vecteur_bestioles);
     int nbBestioles() const;
     void percussionBestiole();
-    int nbrBestiolesGregaires;
-    int nbrBestiolesKamikaze;
-    int nbrBestiolesPeureuse;
-    int nbrBestiolesPrevoyant;
-    int nbrBestiolesMulti;
 
     int nbrBestiolesGregairesMortes;
     int nbrBestiolesKamikazeMortes;
