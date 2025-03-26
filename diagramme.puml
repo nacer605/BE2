@@ -1,8 +1,15 @@
 @startuml dd
 
 class BestioleFactory {
-  + liste_taux : map<string : double>
-  + CreerBestiole():Bestiole
+
+  + CreerBestiole(x_lim , y_lim):Bestiole
+  +double VITESSE_MAX 
+  +double AGE_MAX 
+  +double VITESSE_MAX
+  +double TAILLE 
+  +int RESISTANCE_MAX 
+  +int REDUCTION_RESISTANCE
+
 }
 
 class Bestiole {
@@ -39,20 +46,38 @@ class Bestiole {
   + std::vector<bool> Detection(Milieu)
   + void action(Milieu)
   + void draw(UImg)
+
 }
 
-class Millieu {
- + longueur : int
- + largeur : int
- +AddMember()
+class Milieu {
+ - int longueur
+ - int largeur
+
+ +AjouterBestiole(Bestiole)
  +eliminerBestiole(Bestiole)
- +Step()
+ +Step(Factory , vecteurs_bestioles)
+ +Update()
+ +percussionBestiole()
+ +Detection(Milieu)
 }
+
+
+
+class Aquarium {
+    - int delay 
+    - Milieu flotte
+
+    + genererFichierMetriques(vecteur_bestioles_initiales)
+    + run(Factory, vecteur_bestioles_initiales)
+}
+
+
+
 
 class BestioleOreille {
-    - owner : Bestiole
-    - delta : float
-    - gamme : float
+    - Bestiole owner 
+    - float delta 
+    - float gamme 
     + detecter(Millieu) 
 
 }
@@ -75,7 +100,7 @@ class BestioleNageoire {
 }
 
 class BestioleCamouflage {
-  - Bestiole& Owner
+  - Bestiole Owner
   - double phi
 
   + BestioleCamouflage(Bestiole)
@@ -103,31 +128,32 @@ class BestioleYeux {
 }
 
 interface IComportement {
-  + Deplacer(Bestiole, Milieu)
+  + Déplacer(Bestiole, Milieu)
 }
 
 class Grégaire {
-    -Deplacer(Bestiole) 
+    -Déplacer(Bestiole , Milieu) 
 
 }
 
 class Peureuse{
-    -Deplacer(Bestiole) 
+    -Déplacer(Bestiole , Milieu) 
 
 }
 
 class Kamikaze{
-    -Deplacer(Bestiole) 
+    -Déplacer(Bestiole , Milieu) 
 }
 
-class Prevoyant{
-    -Deplacer(Bestiole) 
+class Prévoyant{
+    -Déplacer(Bestiole , Milieu) 
 
 }
 
 
 class Multi{
-    -Deplacer(Bestiole) 
+    -Deplacer(Bestiole , Milieu) 
+    
 }
 
 BestioleFactory --> Bestiole : créer
@@ -151,8 +177,10 @@ Accessoire <|..BestioleCamouflage
 Accessoire *-- Bestiole
 
 
-Millieu --* "many" Bestiole : contient
+Milieu --* "many" Bestiole : contient
 
-Millieu -- BestioleFactory
+Milieu -- BestioleFactory
+
+Aquarium -- Milieu
 
 @enduml
